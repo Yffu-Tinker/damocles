@@ -83,7 +83,7 @@ public class LogAop {
 
 
     @Around("webLog()")
-    public Object Interceptor(ProceedingJoinPoint proceedingJoinPoint) {
+    public Object interceptor(ProceedingJoinPoint proceedingJoinPoint) {
         long beginTime = System.currentTimeMillis();
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         Method method = signature.getMethod(); //获取被拦截的方法
@@ -114,7 +114,7 @@ public class LogAop {
                 accessHistoryEntity.setIsRefuse(0);
                 accessHistoryEntity.setSysMethodName(methodName);
 
-                /**
+                /*
                  * 日志记录黑名单ip访问；
                  */
                 if (!ipAccessService.ipaccessrecord(request.getRemoteAddr())) {
@@ -123,7 +123,7 @@ public class LogAop {
                 }
                 ipAccessService.saveAccessHistory(accessHistoryEntity);
 
-                /**
+                /*
                  * 访问方法是否需要登录；
                  */
                 if (isLoginRequired(method)) {
@@ -136,9 +136,7 @@ public class LogAop {
         }
 
         try {
-            if (result == null) {
-                result = proceedingJoinPoint.proceed();
-            }
+            result = proceedingJoinPoint.proceed();
         } catch (Throwable e) {
             logger.info("exception: ", e);
         }
@@ -158,7 +156,7 @@ public class LogAop {
      * @return
      */
     private boolean isLoginRequired(Method method) {
-        if (!env.equals("production")) {
+        if (!"production".equals(env)) {
             return false;
         }
 
@@ -178,17 +176,14 @@ public class LogAop {
      */
     private boolean isLogin(HttpServletRequest request) {
         Cookie cookie = WebUtils.getCookie(request, "token");
-        if (cookie != null) {
-            String token = cookie.getValue();
-            TokenEntity tokenEntity = authenticationService.isTokenValid(token);
-            if (tokenEntity != null) {
-                authenticationService.updateTokenValidTime(tokenEntity);
-                return true;
-            } else {
-                return false;
-            }
+        String token = cookie.getValue();
+        TokenEntity tokenEntity = authenticationService.isTokenValid(token);
+        if (tokenEntity != null) {
+            authenticationService.updateTokenValidTime(tokenEntity);
+            return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
 

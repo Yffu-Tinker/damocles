@@ -1,4 +1,4 @@
-package cc.tinker.tools.restrofitTools;
+package cc.tinker.restrofitTools;
 
 import retrofit2.Call;
 import retrofit2.Response;

@@ -1,4 +1,4 @@
-package cc.tinker.tools.restrofitTools;
+package cc.tinker.restrofitTools;
 
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;

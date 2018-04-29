@@ -2,7 +2,7 @@ package cc.tinker.controller;
 
 import cc.tinker.entity.KindlePushRequest;
 import cc.tinker.service.EmailSender;
-import cc.tinker.tools.restrofitTools.JsonResponse;
+import cc.tinker.conveyer.JsonResponse;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
-package cc.tinker.tools.restrofitTools;
+package cc.tinker.restrofitTools;
 
+import cc.tinker.conveyer.JsonResponse;
 import okhttp3.ResponseBody;
 import org.springframework.stereotype.Component;
 import retrofit2.Call;

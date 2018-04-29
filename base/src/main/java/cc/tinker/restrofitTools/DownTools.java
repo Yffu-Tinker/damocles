@@ -1,4 +1,4 @@
-package cc.tinker.tools.restrofitTools;
+package cc.tinker.restrofitTools;
 
 import com.google.common.base.Strings;
 import okhttp3.ResponseBody;
