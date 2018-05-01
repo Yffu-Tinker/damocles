@@ -1,4 +1,4 @@
-package cc.tinker.controller;
+package cc.tinker.web;
 
 import cc.tinker.entity.KindlePushRequest;
 import cc.tinker.service.EmailSender;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @author Eagle on 2018/3/27.
  */
 @RestController
-@RequestMapping("/tinker/kindle")
+@RequestMapping("/kindle")
 public class KindleController {
 
     @Autowired

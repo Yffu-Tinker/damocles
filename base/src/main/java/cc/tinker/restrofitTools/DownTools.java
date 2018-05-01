@@ -24,8 +24,8 @@ public class DownTools {
     /**
      * 根据url下载文件
      *
-     * @param fileUrl url
-     * @param dstEmailAddress
+     * @param fileUrl         url
+     * @param dstEmailAddress e
      */
     public void downLoadFileByUrl(String fileUrl, String dstEmailAddress) {
         if (Strings.isNullOrEmpty(fileUrl)) {
@@ -40,7 +40,7 @@ public class DownTools {
                     String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
                     String absolutePath = writeResponseBodyToDisk(response.body(), tempPath, fileName);
                     RestrofitTools restrofitTools = RetrofitFactory.create(pushUrl, RestrofitTools.class);
-                    restrofitTools.pushFileToKindle(absolutePath,dstEmailAddress);
+                    restrofitTools.pushFileToKindle(absolutePath, dstEmailAddress);
                 }
             }
 
@@ -59,36 +59,20 @@ public class DownTools {
      * @return true
      */
     private String writeResponseBodyToDisk(ResponseBody body, String tempFilePath, String fileName) {
-        try {
-            File file = new File(tempFilePath + File.separator + fileName);
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-            try {
-                byte[] fileReader = new byte[4096];
-                long fileSize = body.contentLength();
-                long fileSizeDownloaded = 0;
-                inputStream = body.byteStream();
-                outputStream = new FileOutputStream(file);
-                while (true) {
-                    int read = inputStream.read(fileReader);
-                    if (read == -1) {
-                        break;
-                    }
-                    outputStream.write(fileReader, 0, read);
-                    fileSizeDownloaded += read;
+        File file = new File(tempFilePath + File.separator + fileName);
+        long fileSizeDownloaded = 0;
+        byte[] fileReader = new byte[4096];
+        try (InputStream inputStream = body.byteStream(); OutputStream outputStream = new FileOutputStream(file)) {
+            while (true) {
+                int read = inputStream.read(fileReader);
+                if (read == -1) {
+                    break;
                 }
-                outputStream.flush();
-                return tempFilePath + File.separator + fileName;
-            } catch (IOException e) {
-                return null;
-            } finally {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
+                outputStream.write(fileReader, 0, read);
+                fileSizeDownloaded += read;
             }
+            outputStream.flush();
+            return tempFilePath + File.separator + fileName;
         } catch (IOException e) {
             return null;
         }
