@@ -1,24 +1,11 @@
 package cc.tinker.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import cc.tinker.entity.Relation;
-import cc.tinker.entity.Sign;
-import cc.tinker.entity.Student;
-import cc.tinker.event.ClickEvent;
 import cc.tinker.event.Event;
-import cc.tinker.event.LocationEvent;
-import cc.tinker.event.ScanCodeEvent;
-import cc.tinker.menu.UsingButton;
 import cc.tinker.request.Request;
 import cc.tinker.response.TextResponse;
 import cc.tinker.util.MessageUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -55,7 +42,7 @@ public class HandleRequestService {
         return response;
     }
 
-    public String handleEvent(Map<String, String> map) {
+    private String handleEvent(Map<String, String> map) {
         String response = "success";
         String eventType = map.get("Event");
         String openId = map.get("FromUserName");

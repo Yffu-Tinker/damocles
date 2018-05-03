@@ -14,6 +14,7 @@ public class Wechat {
 
 	private static final String appId = "wx15d11bec71e28224";
 	private static final String appSecret = "d2c249e836b829ccb94aeffa708560a8";
+	private static final String WEBSITE= "http://whoszus.6655.la";
 
 	private static final String accessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
 	private static final String createMenuUrl = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
@@ -73,11 +74,11 @@ public class Wechat {
 	private String menuData() {
 		View register = new View();
 		register.setName("申请注册");
-		String registerUrl = createMenuUrl("http://qukewechat.tunnel.qydev.com/teacher/registerPage", "snsapi_base");
+		String registerUrl = createMenuUrl(WEBSITE+"/teacher/registerPage", "snsapi_base");
 		register.setUrl(registerUrl);
 		View publish = new View();
 		publish.setName("发布作业");
-		String publishUrl = createMenuUrl("http://qukewechat.tunnel.qydev.com/teacher/publishPage", "snsapi_base");
+		String publishUrl = createMenuUrl(WEBSITE+"/teacher/publishPage", "snsapi_base");
 		publish.setUrl(publishUrl);
 		Second teacher = new Second();
 		teacher.setName("教师");
@@ -90,18 +91,18 @@ public class Wechat {
 		sign.setKey(UsingButton.SIGN);
 		View info = new View();
 		info.setName("个人信息");
-		String bindingUrl = createMenuUrl("http://qukewechat.tunnel.qydev.com/student/bindingPage", "snsapi_base");
+		String bindingUrl = createMenuUrl(WEBSITE+"/student/bindingPage", "snsapi_base");
 		info.setUrl(bindingUrl);
 		Click unbinding = new Click();
 		unbinding.setName("解绑");
 		unbinding.setKey(UsingButton.SIGN);
 		View leave = new View();
 		leave.setName("请假");
-		String leaveUrl = createMenuUrl("http://qukewechat.tunnel.qydev.com/student/leavePage", "snsapi_base");
+		String leaveUrl = createMenuUrl(WEBSITE+"/student/leavePage", "snsapi_base");
 		leave.setUrl(leaveUrl);
 		View getHomework = new View();
 		getHomework.setName("查看作业");
-		String getHmwUrl = createMenuUrl("http://qukewechat.tunnel.qydev.com/student/getHmwPage", "snsapi_base");
+		String getHmwUrl = createMenuUrl(WEBSITE+"/student/getHmwPage", "snsapi_base");
 		getHomework.setUrl(getHmwUrl);
 		Second student = new Second();
 		student.setName("学生");
@@ -118,8 +119,7 @@ public class Wechat {
 		menu.addButton(teacher);
 		menu.addButton(student);
 		menu.addButton(help);
-		String json = JSON.toJSONString(menu, true);
-		return json;
+        return JSON.toJSONString(menu, true);
 	}
 
 	private String createMenuUrl(String redirectUrl, String scope) {

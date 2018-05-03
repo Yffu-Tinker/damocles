@@ -1,8 +1,10 @@
 package cc.tinker.controller;
 
+import cc.tinker.conveyer.JsonResponse;
 import cc.tinker.service.HandleRequestService;
 import cc.tinker.util.MessageUtil;
 import cc.tinker.wechat.Validate;
+import cc.tinker.wechat.Wechat;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,8 @@ public class WechatController {
     @Autowired
     private HandleRequestService requestService;
 
+    private Wechat wechat = Wechat.getInstance();
+
     @RequestMapping(value = "/wechat", method = RequestMethod.GET)
     public String validate(String signature, String timestamp, String nonce, String echostr) {
         String success = "";
@@ -38,6 +42,12 @@ public class WechatController {
     public String service(HttpServletRequest request) {
         Map<String, String> map = MessageUtil.parseXml(request);
         return requestService.handleRequest(map);
+    }
+
+    @RequestMapping(value = "/menu/create", method = RequestMethod.GET)
+    public JsonResponse createMenu() {
+        wechat.createMenu();
+        return JsonResponse.newOk();
     }
 
 }
