@@ -19,7 +19,7 @@ import java.util.Map;
  * @author Tinker on 2016/12/16.
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/hs/auth")
 public class AuthController {
 
     @Autowired

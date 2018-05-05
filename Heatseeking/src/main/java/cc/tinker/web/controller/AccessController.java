@@ -31,10 +31,7 @@ public class AccessController {
     @ApiOperation(value = "获取访问历史", notes = "")
     @RequestMapping("accessHistory")
     public FrontEndResponse accessHistory() {
-        FrontEndResponse frontEndResponse = new FrontEndResponse();
-
-
-        return frontEndResponse;
+        return new FrontEndResponse();
     }
 
     /**

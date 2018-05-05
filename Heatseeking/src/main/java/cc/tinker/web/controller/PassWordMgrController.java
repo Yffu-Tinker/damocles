@@ -18,7 +18,7 @@ import java.util.Map;
  * @author Tinker on 2017/4/10.
  */
 @RestController
-@RequestMapping("/passwordMgr")
+@RequestMapping("/hs/passwordMgr")
 public class PassWordMgrController {
 
     @Autowired
