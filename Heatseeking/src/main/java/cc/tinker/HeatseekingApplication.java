@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author Eagle f
  */
-@SpringBootApplication
+//@SpringBootApplication
 public class HeatseekingApplication {
 
     public static void main(String[] args) {

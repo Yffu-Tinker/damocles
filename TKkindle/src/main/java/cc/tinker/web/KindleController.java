@@ -1,8 +1,9 @@
 package cc.tinker.web;
 
+import cc.tinker.conveyer.JsonResponse;
 import cc.tinker.entity.KindlePushRequest;
 import cc.tinker.service.EmailSender;
-import cc.tinker.conveyer.JsonResponse;
+import cc.tinker.service.KindleService;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class KindleController {
     private String subject;
     @Value("kindle.sender.text")
     private String text;
+    @Autowired
+    private KindleService kindleService;
 
     @RequestMapping("/push/file")
     public JsonResponse pushFileToKindle(String emailAddress, String filePath) {
@@ -40,7 +43,7 @@ public class KindleController {
         }
         Map<String, String> map = Maps.newHashMap();
         map.put(file.getName(), file.getAbsolutePath());
-        emailSender.sendAttachmentsMailLocalFile(emailAddress, subject, text, map);
+        emailSender.sendLocalFile(emailAddress, subject, text, map);
         return JsonResponse.newOk();
     }
 
@@ -66,6 +69,15 @@ public class KindleController {
         }
         emailSender.sendMailByFileUrl(kindlePushRequest.getEmailAddress(), subject, text, kindlePushRequest.getFileUrl());
         return JsonResponse.newOk();
+    }
+
+    @RequestMapping(value = "/push/path/all")
+    public JsonResponse pushAllFile(@RequestParam(value = "path") String path,@RequestParam(value = "email") String email) {
+        Boolean success = kindleService.pushAllFile(email,path);
+        if (success) {
+            return JsonResponse.newOk();
+        }
+        return JsonResponse.newError("推送失败");
     }
 
 }

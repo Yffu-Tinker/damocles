@@ -1,6 +1,8 @@
 package cc.tinker.service;
 
 import cc.tinker.restrofitTools.DownTools;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,6 +25,7 @@ public class EmailSender {
     private JavaMailSender mailSender;
     @Autowired
     private DownTools downTools;
+    Logger logger  = LoggerFactory.getLogger(EmailSender.class);
 
     /**
      * 发送带附件的邮件，fileMap 传null则不发附件；
@@ -30,10 +33,10 @@ public class EmailSender {
      * @param dstEmailAddress 接受地址；
      * @param subject         主题
      * @param text            内容
-     * @param fileMap         文件 key:文件名 value：文件地址；
+     * @param fileMap<fileName,absPath></>         文件 key:文件名 value：文件地址；
      * @throws Exception
      */
-    public void sendAttachmentsMailLocalFile(String dstEmailAddress, String subject, String text, Map<String, String> fileMap) {
+    public void sendLocalFile(String dstEmailAddress, String subject, String text, Map<String, String> fileMap) {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper;
         try {
@@ -49,6 +52,7 @@ public class EmailSender {
                 }
             }
             mailSender.send(mimeMessage);
+            logger.info("推送文件成功",dstEmailAddress);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class Wechat {
 
-    private static final String APP_ID = "wx765a2df963802797";
-    private static final String APP_SECRET = "6c55b06af1e08e81136a0c59a22dc776";
+    private static final String APP_ID = "wx15d11bec71e28224";
+    private static final String APP_SECRET = "d2c249e836b829ccb94aeffa708560a8";
     private static final String WEBSITE = "http://whoszus.6655.la";
 
     private static final String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
@@ -44,7 +44,7 @@ public class Wechat {
         HttpClientImpl httpclient = HttpClientImpl.getInstance();
         try {
             String url = CREATE_MENU_URL.replaceAll("ACCESS_TOKEN", accessToken.getAccessToken());
-            String menu = menuData();
+            String menu = this.menuData();
             String result = httpclient.postString(url, menu);
             JSONObject object = JSON.parseObject(result);
             Integer errcode = (Integer) object.get("errcode");
@@ -72,18 +72,13 @@ public class Wechat {
     }
 
     private String menuData() {
-        View register = new View();
-        register.setName("申请注册");
-        String registerUrl = createMenuUrl(WEBSITE + "/teacher/registerPage", "snsapi_base");
-        register.setUrl(registerUrl);
-        View publish = new View();
-        publish.setName("发布作业");
-        String publishUrl = createMenuUrl(WEBSITE + "/teacher/publishPage", "snsapi_base");
-        publish.setUrl(publishUrl);
+        View testButton = new View();
+        testButton.setName("测试");
+        String registerUrl = createMenuUrl(WEBSITE + "/tinker/test", "snsapi_base");
+        testButton.setUrl(registerUrl);
         Second teacher = new Second();
-        teacher.setName("教师");
-        teacher.addSub_button(register);
-        teacher.addSub_button(publish);
+        teacher.setName("Kindle");
+        teacher.addSub_button(testButton);
 
         Click sign = new Click();
         sign.setName("签到");

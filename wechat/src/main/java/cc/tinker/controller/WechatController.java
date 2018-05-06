@@ -50,4 +50,9 @@ public class WechatController {
         return JsonResponse.newOk();
     }
 
+    @RequestMapping(value = "tinker/test" ,method = RequestMethod.GET)
+    public JsonResponse test(){
+        return JsonResponse.newOk();
+    }
+
 }
