@@ -17,6 +17,7 @@
         <module>Heatseeking</module>
         <module>base</module>
         <module>TKkindle</module>
+        <module>tk-clinic</module>
     </modules>
 
     <parent>

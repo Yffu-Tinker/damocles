@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>clinic</name>
-    <description>clinic mobile sender</description>
+    <description>clinic</description>
     <parent>
         <groupId>cc.tinker</groupId>
         <artifactId>tk-damocles</artifactId>
