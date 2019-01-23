@@ -15,6 +15,6 @@ public class KindleServiceTest {
     @Autowired private KindleService kindleService;
     @Test
     public void pushAllFile() {
-        kindleService.pushAllFile("yeqinglyy_31@kindle.cn","E:\\EBOOKS");
+        kindleService.pushAllFile("yeqinglyy_31@kindle.cn","E:\\tests.txt");
     }
 }

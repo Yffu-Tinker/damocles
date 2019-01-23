@@ -20,6 +20,7 @@
         <module>tk-clinic</module>
         <module>tk-eureka</module>
         <module>tk-zuul</module>
+        <module>source-read</module>
     </modules>
 
     <parent>
